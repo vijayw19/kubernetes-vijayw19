@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amvitech-backend-deployment
+  labels:
+    name: java-app-dp
+    type: backend
+spec:
+  template:
+    metadata:
+      name: amvitech-backend
+      labels:
+        name: amvitech-backend
+        type: front-end
+    spec:
+      containers:
+      - name: amvitech-backend
+        image: vijayw19/amvitech-backend:latest
+  replicas: 3
+  selector:
+     matchLabels:
+        name: amvitech-backend
+
+
+

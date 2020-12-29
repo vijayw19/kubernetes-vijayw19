@@ -1,0 +1,124 @@
+kubectl get pods
+kubectl run amvitech-backend --image=vijayw19/amvitech-backend:latest
+kubectl delete pods amvitech-backend
+kubectl get pods -o wide
+
+-------------------------------------------------Replica Sets-------------------------------------
+kubectl create -f replicasets-frontend.yml
+kubectl describe replicaset kubectl describe replicaset amvitech-frontend-rc
+kubectl edit replicasets amvitech-frontend-rc
+kubectl delete pod amvitech-frontend-rc-xnft4
+
+kubectl scale replicasets amvitech-frontend-rc --replicas=2
+
+------------------------------------------------Deployments-------------------------------------------
+kubectl create  -f "deployment-frontend.yml"
+
+ubectl rollout status deployment  amvitech-frontend-deployment
+
+
+kubectl edit deployment amvitech-frontend-deployment
+
+--------------------------------------------------------exposing service-------------------------------
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>kubectl apply -f deployment-backend.yml
+deployment.apps/amvitech-backend-deployment created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>cd ..
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech>cd service
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f backend-service.yml
+service/amvitech-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl delete service amvitech-service
+service "amvitech-service" deleted
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f backend-service.yml
+service/amvitech-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-service configured
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl delete service amvitech-service
+service "amvitech-service" deleted
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f backend-service.yml
+service/amvitech-backend-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-frontend-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-frontend-service configured
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl delete service amvitech-frontend-service
+service "amvitech-frontend-service" deleted
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-frontend-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>cd ..
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech>cd deployments
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>kubectl apply -f "deployment-frontend.yml"
+deployment.apps/amvitech-frontend-deployment created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>kubectl delete service amvitech-frontend-service     
+service "amvitech-frontend-service" deleted
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>kubectl apply -f frontend-service.yml
+error: the path "frontend-service.yml" does not exist
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\deployments>cd ..
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech>cd service
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-frontend-service created
+
+C:\Vijay_Yadav_study\Kubernetes\code and script\amvitech\service>kubectl apply -f frontend-service.yml
+service/amvitech-frontend-service configured
+
+
+
+
+
+
+-----------------port forwarding---------------------
+
+vyadav5@LNAR-5CG8427RGN MINGW64 /c/Vijay_Yadav_study/Kubernetes/nginx example
+$ kubectl port-forward pod/mypod 8888:5000amvitech-backend-deployment-684bc4dc69-24csx
+Error from server (NotFound): pods "mypod" not found
+
+vyadav5@LNAR-5CG8427RGN MINGW64 /c/Vijay_Yadav_study/Kubernetes/nginx example
+$ kubectl port-forward pod/amvitech-backend-deployment-684bc4dc69-24csx 8087:8080
+Forwarding from 127.0.0.1:8087 -> 8080
+Forwarding from [::1]:8087 -> 8080
+Handling connection for 8087
+Handling connection for 8087
+Handling connection for 8087
+Handling connection for 8087
+
+vyadav5@LNAR-5CG8427RGN MINGW64 /c/Vijay_Yadav_study/Kubernetes/nginx example
+$ kubectl port-forward pod/amvitech-backend-deployment-684bc4dc69-24csx 8088:8080
+Forwarding from 127.0.0.1:8088 -> 8080
+Forwarding from [::1]:8088 -> 8080
+Handling connection for 8088
+Handling connection for 8088
+
+vyadav5@LNAR-5CG8427RGN MINGW64 /c/Vijay_Yadav_study/Kubernetes/nginx example
+$ kubectl get service
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+amvitech-service   NodePort    10.109.222.33    <none>        8087:30005/TCP   23m
+kubernetes         ClusterIP   10.96.0.1        <none>        443/TCP          7h22m
+my-nginx           ClusterIP   10.104.159.113   <none>        80/TCP           8m34s
+
+
+
+
+
+
+
+
+

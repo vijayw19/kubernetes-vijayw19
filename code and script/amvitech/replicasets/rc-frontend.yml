@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: amvitech-frontend-rc
+  labels:
+    name: react-app-rc
+    type: frontend
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: amvitech-frontend
+      labels:
+        name: amvitech-frontend
+        type: front-end
+    spec:
+      containers:
+      - name: amvitech-frontend
+        image: vijayw19/amvitech-frontend:latest

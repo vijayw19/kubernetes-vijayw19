@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+   name: amvitech-backend
+   labels:
+     app: amvitech
+     type: front-ends
+spec:
+  containers:
+  - name: amvitech-backend
+    image: vijayw19/amvitech-backend:latest

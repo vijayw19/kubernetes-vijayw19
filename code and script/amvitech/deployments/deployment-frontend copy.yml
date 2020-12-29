@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amvitech-frontend-deployment
+  labels:
+    name: react-app-dp
+    type: frontend
+spec:
+  template:
+    metadata:
+      name: amvitech-frontend
+      labels:
+        name: amvitech-frontend
+        type: front-end
+    spec:
+      containers:
+      - name: amvitech-frontend
+        image: vijayw19/amvitech-frontend:latest
+  replicas: 3
+  selector:
+     matchLabels:
+        name: amvitech-frontend
+
+
+
